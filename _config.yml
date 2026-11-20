@@ -1,0 +1,6 @@
+title: ISOF — Институт семиотики образов и фольклора
+url: "https://indiso.ru"
+markdown: kramdown
+permalink: /articles/:slug/
+future: true
+description: "Академические исследования манги и аниме: визуальные коды, фольклор и архетипы японской анимации."

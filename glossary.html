@@ -1,0 +1,60 @@
+---
+layout: default
+title: Глоссарий ИСОФ
+permalink: /glossary/
+---
+
+<style>
+    .glossary-header { padding: 48px 0 32px; border-bottom: 1px solid var(--border-color); }
+    .glossary-header h1 { font-family: var(--font-serif); font-size: 44px; margin: 8px 0 16px; }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 28px; }
+    .tab-btn { background: transparent; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; color: var(--text-muted); font-family: var(--font-sans); transition: all 0.2s; }
+    .tab-btn.active, .tab-btn:hover { background: var(--text-main); color: #FFFFFF; border-color: var(--text-main); }
+    
+    .terms-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin: 32px 0; }
+    .term-card { background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 28px; border-radius: 4px; }
+    .term-cat { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-red); margin-bottom: 8px; }
+    .term-title { font-family: var(--font-serif); font-size: 30px; line-height: 1.2; margin-bottom: 4px; }
+    .term-jp { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; font-weight: 500; }
+    .term-text { font-size: 15px; line-height: 1.6; color: var(--text-main); }
+    @media (max-width: 768px) { .terms-list { grid-template-columns: 1fr; } }
+</style>
+
+<section class="glossary-header">
+    <span class="post-meta">Справочный аппарат института</span>
+    <h1>Глоссарий ИСОФ</h1>
+    <p style="color: var(--text-muted); max-width: 680px; font-size: 16px;">
+        Академический словарь японских эстетических концепций, фольклорных существ и специфических визуальных приемов анимации.
+    </p>
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="filterTerms('all', this)">Все термины ({{ site.data.glossary.size }})</button>
+        <button class="tab-btn" onclick="filterTerms('Эстетика и философия', this)">Эстетика и философия</button>
+        <button class="tab-btn" onclick="filterTerms('Визуальные коды (Манпу)', this)">Визуальные коды</button>
+        <button class="tab-btn" onclick="filterTerms('Фольклор и мифология', this)">Фольклор</button>
+        <button class="tab-btn" onclick="filterTerms('Архетипы и тропы', this)">Архетипы</button>
+    </div>
+</section>
+
+<section class="terms-list">
+    {% assign sorted_terms = site.data.glossary | sort: 'title' %}
+    {% for item in sorted_terms %}
+    <article class="term-card" data-category="{{ item.category }}">
+        <div class="term-cat">{{ item.category }}</div>
+        <h2 class="term-title">{{ item.title }}</h2>
+        {% if item.japanese %}
+            <div class="term-jp">{{ item.japanese }}</div>
+        {% endif %}
+        <p class="term-text">{{ item.description }}</p>
+    </article>
+    {% endfor %}
+</section>
+
+<script>
+    function filterTerms(category, btnElement) {
+        document.querySelectorAll('.term-card').forEach(card => {
+            card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+        });
+        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+        btnElement.classList.add('active');
+    }
+</script>

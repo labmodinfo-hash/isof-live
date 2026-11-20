@@ -1,0 +1,157 @@
+---
+layout: default
+title: Главная
+---
+
+<style>
+    /* Дополнительные стили для блоков главной страницы */
+    .dept-section { padding: 48px 0; border-bottom: 1px solid var(--border-color); }
+    .dept-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 24px; }
+    .dept-card { background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 22px; border-radius: 4px; transition: transform 0.2s, border-color 0.2s; display: flex; flex-direction: column; justify-content: space-between; cursor: pointer; }
+    .dept-card:hover { transform: translateY(-3px); border-color: var(--text-main); }
+    .dept-num { font-family: var(--font-serif); font-size: 18px; color: var(--accent-red); font-weight: 700; margin-bottom: 10px; }
+    .dept-card h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; line-height: 1.3; }
+    .dept-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; }
+    .dept-link { font-size: 12px; font-weight: 500; color: var(--text-main); }
+
+    .filter-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-top: 48px; }
+    .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { background: transparent; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; font-size: 13px; cursor: pointer; color: var(--text-muted); font-family: var(--font-sans); transition: all 0.2s; }
+    .tab-btn.active, .tab-btn:hover { background: var(--text-main); color: #FFFFFF; border-color: var(--text-main); }
+
+    /* Темный блок Глоссария */
+    .glossary-banner { background-color: var(--bg-accent); color: #FFFFFF; padding: 48px 40px; border-radius: 4px; margin: 56px 0; display: grid; grid-template-columns: 1fr 1.8fr; gap: 40px; align-items: center; }
+    .glossary-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: #A1A1AA; margin-bottom: 8px; }
+    .glossary-term { font-family: var(--font-serif); font-size: 38px; line-height: 1.1; margin-bottom: 8px; }
+    .glossary-kanji { font-size: 18px; color: #EF4444; }
+    .glossary-desc { font-size: 15px; color: #D4D4D8; margin-bottom: 20px; line-height: 1.6; }
+    .glossary-link { color: #FFFFFF; font-size: 14px; font-weight: 500; border-bottom: 1px solid var(--accent-red); padding-bottom: 2px; }
+
+    /* Блок Манифеста */
+    .manifesto-box { max-width: 740px; margin: 56px auto 24px; text-align: center; padding: 40px 24px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 4px; }
+    .manifesto-box h2 { font-family: var(--font-serif); font-size: 34px; margin: 10px 0 16px; line-height: 1.2; }
+    .manifesto-box p { font-size: 16px; color: var(--text-muted); margin-bottom: 28px; }
+    .btn-dark { display: inline-block; background: var(--text-main); color: #FFFFFF; padding: 12px 24px; border-radius: 4px; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+    .btn-dark:hover { background: var(--accent-red); }
+
+    @media (max-width: 900px) {
+        .dept-grid { grid-template-columns: repeat(2, 1fr); }
+        .glossary-banner { grid-template-columns: 1fr; padding: 32px 24px; gap: 24px; }
+    }
+    @media (max-width: 550px) {
+        .dept-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<!-- 1. ПЕРВЫЙ ЭКРАН (HERO) -->
+<section class="hero">
+    <a href="/research/" class="post-meta">Академические исследования фольклорных и современных визуальных образов →</a>
+    <h1>Расшифровываем визуальные коды, мифологию и скрытые смыслы японской анимации</h1>
+    <p style="color: var(--text-muted); max-width: 680px; font-size: 17px;">
+        Исследования на стыке семиотики, религиоведения и культурологии. Разбираем графический язык кадров, корни фольклора и эволюцию архетипов.
+    </p>
+</section>
+
+<!-- 2. ПРОЕКТЫ ИНСТИТУТА -->
+<section class="dept-section" id="departments">
+    <h2 style="font-family: var(--font-serif); font-size: 32px;">Проекты института</h2>
+    <div class="dept-grid">
+        <a href="#articles" class="dept-card" onclick="filterPosts('Кафедра визуальных кодов')">
+            <div>
+                <div class="dept-num">I</div>
+                <h3>Проект визуальных кодов</h3>
+                <p>Символика цвета, графические знаки эмоций (манпу), композиция кадра и язык тела.</p>
+            </div>
+            <span class="dept-link">Смотреть работы →</span>
+        </a>
+        <a href="#articles" class="dept-card" onclick="filterPosts('Лаборатория фольклора и мифа')">
+            <div>
+                <div class="dept-num">II</div>
+                <h3>Проект фольклора и мифа</h3>
+                <p>Синтоистские ритуалы, буддийские мотивы, демонология ёкаев и городские легенды.</p>
+            </div>
+            <span class="dept-link">Смотреть работы →</span>
+        </a>
+        <a href="#articles" class="dept-card" onclick="filterPosts('Архив архетипов')">
+            <div>
+                <div class="dept-num">III</div>
+                <h3>Архив архетипов</h3>
+                <p>Эволюция сюжетных тропов, мономиф в исэкае и типология персонажей.</p>
+            </div>
+            <span class="dept-link">Смотреть работы →</span>
+        </a>
+        <a href="/glossary/" class="dept-card">
+            <div>
+                <div class="dept-num">IV</div>
+                <h3>Глоссарий ИСОФ</h3>
+                <p>Академический словарь японских эстетических и культурологических терминов.</p>
+            </div>
+            <span class="dept-link">К словарю →</span>
+        </a>
+    </div>
+</section>
+
+<!-- 3. ЛЕНТА ИССЛЕДОВАНИЙ С ФИЛЬТРОМ -->
+<section id="articles">
+    <div class="filter-header">
+        <h2 style="font-family: var(--font-serif); font-size: 32px;">Свежие исследования</h2>
+        <div class="filter-tabs">
+            <button class="tab-btn active" data-filter="all" onclick="filterPosts('all')">Все материалы</button>
+            <button class="tab-btn" data-filter="Кафедра визуальных кодов" onclick="filterPosts('Кафедра визуальных кодов')">Визуальные коды</button>
+            <button class="tab-btn" data-filter="Лаборатория фольклора и мифа" onclick="filterPosts('Лаборатория фольклора и мифа')">Фольклор</button>
+            <button class="tab-btn" data-filter="Архив архетипов" onclick="filterPosts('Архив архетипов')">Архетипы</button>
+        </div>
+    </div>
+
+    <div class="articles-grid">
+        {% for post in site.posts %}
+        <article class="article-card" data-category="{{ post.category }}">
+            {% if post.image %}
+                <a href="{{ post.url }}"><img src="{{ post.image }}" alt="{{ post.title }}"></a>
+            {% endif %}
+            <div class="article-body">
+                <span class="post-meta">{{ post.category | replace: 'Кафедра визуальных кодов', 'Проект визуальных кодов' | replace: 'Лаборатория фольклора и мифа', 'Проект фольклора и мифа' }}</span>
+                <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+                <p class="article-excerpt">{{ post.excerpt }}</p>
+                <div class="article-tags">{{ post.tags | join: " • " }}</div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- 4. ТЕРМИН ДНЯ ИЗ ГЛОССАРИЯ -->
+<section class="glossary-banner" id="glossary">
+    <div>
+        <div class="glossary-label">Словарь ИСОФ • Термин дня</div>
+        <div class="glossary-term">Моно-но аварэ</div>
+        <div class="glossary-kanji">物の哀れ — «печальное очарование вещей»</div>
+    </div>
+    <div>
+        <p class="glossary-desc">
+            Эстетический принцип японской культуры, обозначающий светлую грусть от осознания быстротечности и хрупкости всего прекрасного в мире. В аниме этот мотив чаще всего передается через кадры опадающих лепестков сакуры, уходящих поездов или последних дней летних каникул.
+        </p>
+        <a href="/glossary/" class="glossary-link">Открыть глоссарий →</a>
+    </div>
+</section>
+
+<!-- 5. МАНИФЕСТ ИНСТИТУТА -->
+<section class="manifesto-box" id="about">
+    <span class="post-meta">Манифест проекта</span>
+    <h2>Аниме как сложная знаковая система</h2>
+    <p>
+        Институт семиотики образов и фольклора (ISOF) создан для тех, кто смотрит глубже поверхности кадра. Мы объединяем методы культурологии, религиоведения и визуальной антропологии, чтобы расшифровывать скрытые коды современной японской анимации.
+    </p>
+    <a href="#articles" class="btn-dark" onclick="filterPosts('all')">Перейти к архиву исследований</a>
+</section>
+
+<script>
+    function filterPosts(category) {
+        document.querySelectorAll('.article-card').forEach(function (card) {
+            card.style.display = (category === 'all' || card.dataset.category === category) ? '' : 'none';
+        });
+        document.querySelectorAll('.tab-btn').forEach(function (btn) {
+            btn.classList.toggle('active', btn.dataset.filter === category);
+        });
+    }
+</script>

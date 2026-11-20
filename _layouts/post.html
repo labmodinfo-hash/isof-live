@@ -1,0 +1,24 @@
+---
+layout: default
+---
+<article class="post-wrapper">
+    {% if page.image %}
+        <img src="{{ page.image }}" alt="{{ page.title }}" class="post-cover">
+    {% endif %}
+    <div class="post-meta">{{ page.category | replace: 'Кафедра визуальных кодов', 'Проект визуальных кодов' | replace: 'Лаборатория фольклора и мифа', 'Проект фольклора и мифа' }} • {{ page.date | date: "%d.%m.%Y" }}</div>
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.excerpt %}
+        <div class="post-lead">{{ page.excerpt }}</div>
+    {% endif %}
+    <div class="post-content">
+        {{ content }}
+    </div>
+    {%- assign share_url = site.url | append: page.url | url_encode -%}
+    {%- assign share_title = page.title | url_encode -%}
+    <div class="share">
+        <span class="share-label">Поделиться</span>
+        <a class="share-btn" href="https://vk.com/share.php?url={{ share_url }}&title={{ share_title }}" target="_blank" rel="noopener noreferrer">ВКонтакте</a>
+        <a class="share-btn" href="https://t.me/share/url?url={{ share_url }}&text={{ share_title }}" target="_blank" rel="noopener noreferrer">Telegram</a>
+        <a class="share-btn" href="mailto:?subject={{ share_title }}&body={{ share_url }}">Почта</a>
+    </div>
+</article>
